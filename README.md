@@ -41,8 +41,7 @@ For this sample, you can use:
     "Sid": "LeastPrivilege4BRClient",
     "Effect": "Allow",
     "Action": [
-        "bedrock:InvokeModel",
-        "bedrock:InvokeModelWithResponseStream"
+        "bedrock:InvokeModel"
     ],
     "Resource": "arn:aws:bedrock:us-west-2::foundation-model/*"
     }]
