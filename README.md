@@ -21,7 +21,7 @@ There are 2 tools available to the models to use:
 
 The model each turn will review the prompt given, will decide if it can answer properly the question provided in the user input, each turn according to the response from Bedrock `end_turn` or `tool_use`. `end_turn` means that the final answer was provided, and `tool_use` will parse the appropriate data per the tool description that will be used to execute the tool function, and build a proper result back to the model.
 
->This sample code was tested using [pyenv](https://github.com/pyenv/pyenv) with python 3.12
+>This sample code was tested using [pyenv](https://github.com/pyenv/pyenv) with python 3.12, and set in [.python-version](.python-version)
 
 ## Setup
 
