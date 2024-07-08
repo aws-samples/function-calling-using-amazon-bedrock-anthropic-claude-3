@@ -2,22 +2,26 @@
 
 Amazon Bedrock is a fully managed service that offers a choice of high-performing foundation models from leading AI companies and a set of capabilities to build generative AI applications.
 
-This Sample repo provide an example for using function calling using the [Converse API](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/bedrock-runtime/client/converse.html) with [Anthropic Claude 3 Sonnet](https://aws.amazon.com/about-aws/whats-new/2024/03/anthropics-claude-3-sonnet-model-amazon-bedrock/), using multiple tools. This repo is a sample only code, that demostrate how to use function calling as tools for a model to use to fetch results using plain function code.
+This sample repo provide an example for using function calling using the [Converse API](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/bedrock-runtime/client/converse.html) with [Anthropic Claude 3 Sonnet](https://aws.amazon.com/about-aws/whats-new/2024/03/anthropics-claude-3-sonnet-model-amazon-bedrock/), using multiple tools. This repo is a sample only code, that demonstrate how to use function calling as tools for a model to use to fetch results using plain function code.
 
-Function calling e.g. tools, is a way to provide the model, with a descriptive guidance for a function that is available to the model to use for answering the user input. 
+## Overview
+
+Function calling (also known as tools), is a way to provide the model, with a descriptive guidance for a function that is available to the model to use for answering the user input. 
 
 In this sample, we will ask a Claude 3 to answer, what is a stock ticker value, and with option to convert the default ticker currency to any currency that was provided in the user input.
 
+## Tools
+
 There are 2 tools available to the models to use:
 
-* get_stock_price - given a ticker string, the open source library [yfinance](https://pypi.org/project/yfinance/) will get the current stock value, and curreny that its being traded.
-* convert_currency - given an amount, source and target currency, the open source library [currencyconverter](https://pypi.org/project/currencyconverter/) will conver the amount given from source currency to target currency.
+* get_stock_price - given a ticker string, the open source library [yfinance](https://pypi.org/project/yfinance/) will get the current stock value, and currency that its being traded.
+* convert_currency - given an amount, source and target currency, the open source library [currencyconverter](https://pypi.org/project/currencyconverter/) will convert the amount given from source currency to target currency.
 
 The model each turn will review the prompt given, will decide if it can answer properly the question provided in the user input, each turn according to the response from Bedrock `end_turn` or `tool_use`. `end_turn` means that the final answer was provided, and `tool_use` will parse the appropriate data per the tool description that will be used to execute the tool function, and build a proper result back to the model.
 
 >This sample code was tested using [pyenv](https://github.com/pyenv/pyenv) with python 3.12
 
-## Requirement
+## Setup
 
 The code uses `us-west-2`, and be configured in [ask.py](pkg/ask.py)
 
@@ -48,18 +52,20 @@ For this sample, you can use:
 }
 ```
 
-This can be more restricted using least privileges with the specific model id.
+>This can be more restricted using least privileges with the specific model id.
+
+## Usage
 
 To run this sample code, run `pip install -r requirements.txt` and then run the `main.py`. optionally you can add `--input` argument to overide the default user input text.
 
 
-### Walkthrough the default prompt
+### Example
 
 **Default prompt**: "What is the current stock price of amazon stock in pounds?
 
-Claude will know the Amazon Ticker is AMZN, will use the tool get the ticker value, and then will convert the source currency of the stock price to the destination currency.
+For example Anthropic Claude 3 Sonnet will know the Amazon Ticker is AMZN, will use the tool get the ticker value, and then will convert the source currency of the stock price to the destination currency.
 
-Each itteration of inference, when a `tool_use` is returned, the returned messages will be appended to build a conversation like for the model, due to the nature of LLM's being stateless.
+Each iteration of inference, when a `tool_use` is returned, the returned messages will be appended to build a conversation like for the model, due to the nature of LLM's being stateless.
 
 The final prompt, before the final answer from the Claude 3 will look similar to this:
 
@@ -149,6 +155,8 @@ The final prompt, before the final answer from the Claude 3 will look similar to
 ```
 
 And the final answer should be similar to this: `So the current Amazon (AMZN) stock price of $200.00 USD converts to £158.02 GBP.`
+
+>**Note:** Stock prices and currency exchange rates are highly volatile and can change rapidly. The example output shown in this README may not reflect current market values. When running the code, you'll get real-time data which may differ from the examples provided.
 
 ## Security
 
