@@ -14,13 +14,14 @@ modelId = "anthropic.claude-3-sonnet-20240229-v1:0"
 # Converse API inferense parameters
 kwargs = {
     "temperature": 0,
-    "maxTokens": 300,
+    "maxTokens": 500,
     "topP": 0,
 }
 
 
 system_text_promot = """you are a stock market bot, that provides accurate ticker prices at any currency.
 use your tools to get stock price, and covert to another currency when asked.
+You answer only questions on companies ticker value and currency.
 """
 
 
