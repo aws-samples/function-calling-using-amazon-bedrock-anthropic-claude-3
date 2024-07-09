@@ -17,7 +17,7 @@ In this sample, we will ask a Claude 3 to answer, what is a stock ticker value, 
 There are 2 tools available to the models to use:
 
 * get_stock_price - given a ticker string, the open source library [yfinance](https://pypi.org/project/yfinance/) will get the current stock value, and currency that its being traded.
-* convert_currency - given an amount, source and target currency, the open source library [currencyconverter](https://pypi.org/project/currencyconverter/) will convert the amount given from source currency to target currency.
+* convert_currency - given an amount, source and target currency, the open source library [CurrencyConverter](https://pypi.org/project/CurrencyConverter/) will convert the amount given from source currency to target currency.
 
 The model each turn will review the prompt given, will decide if it can answer properly the question provided in the user input, each turn according to the response from Bedrock `end_turn` or `tool_use`. `end_turn` means that the final answer was provided, and `tool_use` will parse the appropriate data per the tool description that will be used to execute the tool function, and build a proper result back to the model.
 
