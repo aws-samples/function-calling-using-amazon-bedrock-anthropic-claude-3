@@ -64,7 +64,7 @@ def main():
                         messages.append(message)
                 
                 # See the messages appended that are being built for the LLM, this will allow the Bedrock LLM to provide the final answer.
-                logger.debug(f"messages is now:\n{json.dumps(messages)}")
+                logger.debug(f"messages:\n{json.dumps(messages)}")
 
         else:
             # Stop reasons can be: 'end_turn'|'tool_use'|'max_tokens'|'stop_sequence'|'guardrail_intervened'|'content_filtered'
