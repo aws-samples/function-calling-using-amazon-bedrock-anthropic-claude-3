@@ -9,12 +9,17 @@ bedrock_client = boto3.client("bedrock-runtime", region_name="us-west-2")
 # Bedrock model selected
 # See supported models:
 # https://docs.aws.amazon.com/bedrock/latest/userguide/conversation-inference.html#conversation-inference-supported-models-features
-modelId = "anthropic.claude-3-sonnet-20240229-v1:0"
+modelId = "anthropic.claude-3-sonnet-20240229-v1:0" # Claude Sonnet 3
+# modelId = "anthropic.claude-3-5-sonnet-20240620-v1:0" # Claude Sonnet 3.5
+# modelId = "cohere.command-r-v1:0" # Command R
+# modelId = "cohere.command-r-plus-v1:0" # Command R+
+# modelId = "mistral.mistral-large-2407-v1:0" # Mistral Large
+# modelId = "meta.llama3-1-70b-instruct-v1:0" # Meta LLAMA3.1 70B
 
 # Converse API inferense parameters
 kwargs = {
     "temperature": 0,
-    "maxTokens": 500,
+    "maxTokens": 2048,
     "topP": 0,
 }
 
